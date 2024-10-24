@@ -1,0 +1,11 @@
+*
+!.git
+!.gitmodules
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!packages/backend/package.json
+!packages/backend/src
+!packages/backend/.env.production
+!packages/backend/tsconfig.json
+!packages/backend/vite.config.ts

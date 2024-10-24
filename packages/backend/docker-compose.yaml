@@ -1,0 +1,72 @@
+services:
+
+#  backend:
+#    build:
+#      dockerfile: Dockerfile
+#      context: .
+#    ports:
+#      - 2050:2050
+
+  mongo:
+    privileged: true
+    image: bardakdev/mongo
+    container_name: mongo
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - MONGO_INITDB_ROOT_USERNAME=root
+      - MONGO_INITDB_ROOT_PASSWORD=root123
+      - MONGO_INITDB_DATABASE=skinport
+      - MONGO_REPLICA_SET_NAME=rs0
+    volumes:
+      - mongo-db:/data/db
+      - mongo-db-config:/data/configdb
+
+    command: [ --replSet, rs0, --bind_ip_all, --port, "27017", --keyFile, "/opt/keyfile" ]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: test $$(echo "rs.initiate({_id:'rs0',members:[{_id:0,host:'mongo:27017'}]}).ok || rs.status().ok" | mongo
+        -u $${MONGO_INITDB_ROOT_USERNAME} -p $${MONGO_INITDB_ROOT_PASSWORD} --quiet) -eq 1
+      interval: 10s
+      start_period: 30s
+
+  redis:
+    image: redis:alpine
+    privileged: true
+    ports:
+      - 6379:6379
+    volumes:
+      - redis:/data
+    sysctls:
+      net.core.somaxconn: 65535
+    command: "/bin/sh -c redis-server & echo 'echo never > /sys/kernel/mm/transparent_hugepage/enabled' > /etc/rc.local"
+
+#  minio:
+#    image: minio/minio
+#    ports:
+#      - "8080:8080"
+#      - "9000:9000"
+#    volumes:
+#      - media:/data
+#    environment:
+#      MINIO_ROOT_USER: 8VUKTW1WH9ER56OTO9Y
+#      MINIO_ROOT_PASSWORD: LRHKD9EUJ9WQMRHYILNKRJN8O8W
+#
+#    command: server --address ":8080" --console-address ":9000" /data
+
+networks:
+  default:
+    name: "sp"
+
+volumes:
+  mongo-db:
+    name: "sp_mongo-db"
+  mongo-db-config:
+    name: "sp_mongo-db-config"
+  redis:
+    name: "sp_redis"
+  media:
+    name: "sp_media"

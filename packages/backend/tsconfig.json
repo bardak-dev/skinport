@@ -1,0 +1,54 @@
+{
+ "compilerOptions": {
+  "target": "ESNext",
+  "module": "NodeNext",
+  "noLib": false,
+  "emitDecoratorMetadata": true,
+  "declaration": false,
+  "allowJs": true,
+  "checkJs": true,
+  "outDir": "dist",
+  "rootDir": "src",
+  "noEmit": false,
+  "strict": false,
+  "moduleResolution": "NodeNext",
+  "baseUrl": "src",
+  "esModuleInterop": true,
+  "resolveJsonModule": true,
+  "skipLibCheck": true,
+  "lib": [
+   "dom",
+   "dom.iterable",
+   "esnext"
+  ],
+  "sourceMap": false,
+  "forceConsistentCasingInFileNames": true,
+  "experimentalDecorators": true,
+  "allowSyntheticDefaultImports": true,
+  "types": [
+   "node"
+  ],
+  "typeRoots": [
+   "node_modules/@types",
+   "src/types.d.ts"
+  ],
+  "paths": {
+   "app/*": [
+    "./*"
+   ]
+  }
+ },
+ "include": [
+  "src/"
+ ],
+ "exclude": [
+  "dist",
+  "build",
+  "tests",
+  "**/*.spec.js",
+  "node_modules",
+ ],
+ "ts-node": {
+  "transpileOnly": true
+ }
+}

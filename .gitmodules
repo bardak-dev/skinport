@@ -1,0 +1,3 @@
+; [submodule "libs/typegoose-cursor-pagination"]
+; 	path = libs/typegoose-cursor-pagination
+; 	url = git@github.com:stigma-io/typegoose-cursor-pagination.git

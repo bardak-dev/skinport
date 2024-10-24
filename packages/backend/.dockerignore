@@ -1,0 +1,9 @@
+*
+!src
+!views
+!package.json
+!.env.production
+!.env.stage
+!tsconfig.json
+!yarn.lock
+!mongo.keyfile

@@ -1,0 +1,19 @@
+{
+  "jsc": {
+    "parser": {
+      "syntax": "typescript",
+      "tsx": false,
+      "decorators": true,
+      "dynamicImport": true
+    },
+    "target": "esnext",
+    "baseUrl": ".",
+    "transform": {
+      "legacyDecorator": true,
+  	  "decoratorMetadata": true
+    }
+  },
+  "module": {
+    "type": "nodenext"
+  },
+}
